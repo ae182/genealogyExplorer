@@ -64,8 +64,8 @@ public class Account {
 
 */
     @Id
-    @GeneratedValue
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     Integer id;
     
     @Column(name = "name")
