@@ -18,6 +18,18 @@ public class PersonService {
 		
 	}
 	
+	public int[] getParent(String specialKey) {
+		
+		// This will get the direct parents
+		int []parentIds = personRepository.getParent(specialKey);
+		
+		for (int i = 0; i < parentIds.length; i++) {
+			
+			
+		}
+		
+	}
+	
 	public APerson getPerson(String specialKey) {
 		return personRepository.findAPersonBySpecialKey(specialKey);
 	}

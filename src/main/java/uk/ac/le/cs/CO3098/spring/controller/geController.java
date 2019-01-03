@@ -50,6 +50,17 @@ public class geController {
 				
 	}
 	
+	// GET /GE/person/ancestors/6
+	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
+	public @ResponseBody String ancestors(@PathVariable String id) {
+		
+		APerson person = personService.getPerson(id);
+		
+		int [] mfids = personService.getParent(id);
+				
+		return "";
+	}
+	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public @ResponseBody String add(
 			@RequestParam(value="key") String key,
