@@ -22,4 +22,10 @@ public class PersonService {
 		return personRepository.findAPersonBySpecialKey(specialKey);
 	}
 	
+	public void deleteAPerson(Integer id) {
+			
+		personRepository.delete(id);
+		
+	}
+	
 }
