@@ -1,30 +1,20 @@
 package uk.ac.le.cs.CO3098.spring.domain;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 @Entity
-@Table(name = "Person")
-public class Person implements Serializable {
+@Table(name = "APerson")
+public class APerson {
 	
-
-	// Equivalent to id
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer Id;
 	
-	@Column(name = "key")
-	private String specialKey;
-	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "specialKey")
+	private String specialKey;
 	
 	@Column(name = "mothersKey")
 	private String mothersKey;
@@ -38,6 +28,17 @@ public class Person implements Serializable {
 	@Column(name = "gender")
 	private String gender;
 		
+	@Override
+	public String toString() {
+		       return "Name: '" + this.name 
+				+ "', specialKey: '" + this.specialKey
+				+ "', mothersKey: '" + this.mothersKey 
+				+ "', fathersKey: '" + this.fathersKey
+				+ "', DOB: '" + this.dateOfBirth
+				+ "', gender: '" + this.gender 
+				+ "', mothersKey: '" + this.mothersKey + "'";
+	} 
+	
 	public Integer getId() {
 		return Id;
 	}
@@ -47,12 +48,13 @@ public class Person implements Serializable {
 	}
 	
 	public String getSpecialKey() {
-		return specialKey;
+		return this.specialKey;
 	}
-	
+
 	public void setSpecialKey(String specialKey) {
 		this.specialKey = specialKey;
 	}
+	
 	
 	public String getName() {
 		return name;
@@ -93,6 +95,5 @@ public class Person implements Serializable {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
+	
 }
-

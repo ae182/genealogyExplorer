@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.ac.le.cs.CO3098.spring.domain.APerson;
 import uk.ac.le.cs.CO3098.spring.domain.Person;
 import uk.ac.le.cs.CO3098.spring.service.PersonService;
 
@@ -44,28 +45,53 @@ public class geController {
 			return " GeneralException: Cannot create a Person since some of the fields are empty ";
 		}
 		
-		
-		Person person = new Person();
-		
-		/*
-		System.out.println("The key is ... ");
-		System.out.println(key);
-		System.out.println("The name is ... ");
-		System.out.println(name);
-		*/
-		
-		person.setId(Integer.parseInt(key));
+		APerson person = new APerson();
+	
+		person.setSpecialKey(key);
 		person.setName(name);
 		person.setDateOfBirth(dob);
 		person.setMothersKey(m);
 		person.setFathersKey(f);
 		person.setGender(g);
 		
+		// Check whether the mother and father property has been set otherwise insert into database
+		if (person.getMothersKey() == "" && person.getFathersKey() == "" ) {
 			
-		personService.savePerson(person);
-		
-		return "Person inserted into database";
-		
+			personService.savePerson(person);
+		}
+			
+		// Check that the person already exists
+		APerson isPersonExist = personService.getPerson(person.getSpecialKey());
+				
+		if (isPersonExist == null) {
+			
+			// The database is completely empty, create person
+			personService.savePerson(person);
+			return "Database was empty we are going to create a person";
+					
+		} else {
+			
+			APerson mother = personService.getPerson(isPersonExist.getMothersKey());
+			APerson father = personService.getPerson(isPersonExist.getFathersKey());
+			
+			if (mother != null && father != null ) {
+				
+				personService.savePerson(person);
+				return "person save into database";
+				
+			} else {
+				// no parents don't create person 
+				
+				//System.out.println("No parents don't create person");
+				//return "No parents don't create person";
+				
+				personService.savePerson(person);
+				return  "person saved";
+			}
+						
+			
+		}
+				
 	}
 
 }
