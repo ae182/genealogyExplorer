@@ -28,6 +28,17 @@ public class APerson {
 	@Column(name = "gender")
 	private String gender;
 		
+	@Override
+	public String toString() {
+		       return "Name: '" + this.name 
+				+ "', specialKey: '" + this.specialKey
+				+ "', mothersKey: '" + this.mothersKey 
+				+ "', fathersKey: '" + this.fathersKey
+				+ "', DOB: '" + this.dateOfBirth
+				+ "', gender: '" + this.gender 
+				+ "', mothersKey: '" + this.mothersKey + "'";
+	} 
+	
 	public Integer getId() {
 		return Id;
 	}

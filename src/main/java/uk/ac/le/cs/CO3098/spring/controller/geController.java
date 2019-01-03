@@ -45,18 +45,8 @@ public class geController {
 			return " GeneralException: Cannot create a Person since some of the fields are empty ";
 		}
 		
-		
 		APerson person = new APerson();
-		
-		/*
-		System.out.println("The key is ... ");
-		System.out.println(key);
-		System.out.println("The name is ... ");
-		System.out.println(name);
-		*/
-		
-		//person.setId(Integer.parseInt(key));
-		//person.setSpecialKey(Integer.parseInt(key));
+	
 		person.setSpecialKey(key);
 		person.setName(name);
 		person.setDateOfBirth(dob);
@@ -64,32 +54,44 @@ public class geController {
 		person.setFathersKey(f);
 		person.setGender(g);
 		
+		// Check whether the mother and father property has been set otherwise insert into database
+		if (person.getMothersKey() == "" && person.getFathersKey() == "" ) {
+			
+			personService.savePerson(person);
+		}
+			
 		// Check that the person already exists
 		APerson isPersonExist = personService.getPerson(person.getSpecialKey());
-		
-		if (isPersonExist == null) {
-			// Person does not exist
-			System.out.println("Person does not exist");
-			
-			APerson isMotherExist = personService.getPerson(isPersonExist.getMothersKey());
-			APerson isFatherExist = personService.getPerson(isPersonExist.getFathersKey());
-
-			if (isMotherExist == null || isFatherExist == null ) {
 				
-			}
+		if (isPersonExist == null) {
 			
+			// The database is completely empty, create person
+			personService.savePerson(person);
+			return "Database was empty we are going to create a person";
+					
 		} else {
-			// Person exists 
-			System.out.println("Person exists");
 			
+			APerson mother = personService.getPerson(isPersonExist.getMothersKey());
+			APerson father = personService.getPerson(isPersonExist.getFathersKey());
+			
+			if (mother != null && father != null ) {
+				
+				personService.savePerson(person);
+				return "person save into database";
+				
+			} else {
+				// no parents don't create person 
+				
+				//System.out.println("No parents don't create person");
+				//return "No parents don't create person";
+				
+				personService.savePerson(person);
+				return  "person saved";
+			}
+						
 			
 		}
-		
-			
-		personService.savePerson(person);
-		
-		return "Person inserted into database";
-		
+				
 	}
 
 }
