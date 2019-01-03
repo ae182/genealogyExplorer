@@ -18,7 +18,10 @@ public class Person implements Serializable {
 	// Equivalent to id
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private long Id;
+	private Integer Id;
+	
+	@Column(name = "key")
+	private String specialKey;
 	
 	@Column(name = "name")
 	private String name;
@@ -35,14 +38,22 @@ public class Person implements Serializable {
 	@Column(name = "gender")
 	private String gender;
 		
-	public long getId() {
+	public Integer getId() {
 		return Id;
 	}
-
+		
 	public void setId(Integer Id) {
 		this.Id = Id;
 	}
-
+	
+	public String getSpecialKey() {
+		return specialKey;
+	}
+	
+	public void setSpecialKey(String specialKey) {
+		this.specialKey = specialKey;
+	}
+	
 	public String getName() {
 		return name;
 	}
