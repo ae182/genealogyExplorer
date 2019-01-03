@@ -3,6 +3,7 @@ package uk.ac.le.cs.CO3098.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,18 @@ public class geController {
 	
 	@Autowired
 	public PersonService personService; 
+	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public @ResponseBody String delete(@PathVariable String id) {
+		
+		System.out.println("Id to be deleted is " + id);
+		
+		APerson personToDelete = personService.getPerson(id);
+		
+		personService.deleteAPerson(personToDelete.getId());
+		
+		return "Id to be deleted is " + id;
+	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public @ResponseBody String add(
@@ -92,6 +105,8 @@ public class geController {
 			
 		}
 				
-	}
+	} // End method
+	
+	
 
 }
