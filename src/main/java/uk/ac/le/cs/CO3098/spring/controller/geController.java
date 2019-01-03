@@ -49,17 +49,31 @@ public class geController {
 		}
 				
 	}
+	//////
+	
 	
 	// GET /GE/person/ancestors/6
 	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
 	public @ResponseBody String ancestors(@PathVariable String id) {
 		
+		System.out.println("It's working");
+		
+		// person 7
 		APerson person = personService.getPerson(id);
 		
-		int [] mfids = personService.getParent(id);
+		person.setAncestors(personService.getParent(id));
+		
+		System.out.println("It's working");
+		
+		//String [] mfids = personService.getParent(id);
+		
+		
 				
-		return "";
+		return "Worked ";
 	}
+	
+	//////
+	
 	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public @ResponseBody String add(

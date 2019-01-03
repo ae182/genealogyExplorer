@@ -1,5 +1,7 @@
 package uk.ac.le.cs.CO3098.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +19,18 @@ public class PersonService {
 		personRepository.save(p);
 		
 	}
-	
-	public int[] getParent(String specialKey) {
+	// special key is 7
+	public APerson getParent(String specialKey) {
 		
-		// This will get the direct parents
-		int []parentIds = personRepository.getParent(specialKey);
+		// This will get the direct parents of person 7
+		// 0 f 
+		// 1 m
+		List<String> parentIds = personRepository.getParent(specialKey);
 		
-		for (int i = 0; i < parentIds.length; i++) {
-			
-			
-		}
+		System.out.println();
+		
+		//return getParent(parentIds[0]);
+		return new APerson();
 		
 	}
 	
