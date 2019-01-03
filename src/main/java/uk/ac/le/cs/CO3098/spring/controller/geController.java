@@ -33,6 +33,23 @@ public class geController {
 		return "Id to be deleted is " + id;
 	}
 	
+	// GET /GE/person/get/12
+	@RequestMapping(value="/get/{id}", method=RequestMethod.GET)
+	public @ResponseBody String get(@PathVariable String id) {
+				
+		APerson personInfo = personService.getPerson(id);
+		
+		if (personInfo == null ) {
+			
+			return "Person does not exist";
+			
+		} else {
+			
+			return personInfo.toString();
+		}
+				
+	}
+	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public @ResponseBody String add(
 			@RequestParam(value="key") String key,
