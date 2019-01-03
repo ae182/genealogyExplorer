@@ -64,6 +64,27 @@ public class geController {
 		person.setFathersKey(f);
 		person.setGender(g);
 		
+		// Check that the person already exists
+		APerson isPersonExist = personService.getPerson(person.getSpecialKey());
+		
+		if (isPersonExist == null) {
+			// Person does not exist
+			System.out.println("Person does not exist");
+			
+			APerson isMotherExist = personService.getPerson(isPersonExist.getMothersKey());
+			APerson isFatherExist = personService.getPerson(isPersonExist.getFathersKey());
+
+			if (isMotherExist == null || isFatherExist == null ) {
+				
+			}
+			
+		} else {
+			// Person exists 
+			System.out.println("Person exists");
+			
+			
+		}
+		
 			
 		personService.savePerson(person);
 		

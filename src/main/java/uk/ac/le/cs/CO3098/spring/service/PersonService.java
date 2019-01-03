@@ -18,4 +18,8 @@ public class PersonService {
 		
 	}
 	
+	public APerson getPerson(String specialKey) {
+		return personRepository.findAPersonBySpecialKey(specialKey);
+	}
+	
 }
