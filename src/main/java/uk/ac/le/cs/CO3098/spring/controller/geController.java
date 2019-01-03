@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.ac.le.cs.CO3098.spring.domain.APerson;
 import uk.ac.le.cs.CO3098.spring.domain.Person;
 import uk.ac.le.cs.CO3098.spring.service.PersonService;
 
@@ -45,7 +46,7 @@ public class geController {
 		}
 		
 		
-		Person person = new Person();
+		APerson person = new APerson();
 		
 		/*
 		System.out.println("The key is ... ");
@@ -54,7 +55,9 @@ public class geController {
 		System.out.println(name);
 		*/
 		
-		person.setId(Integer.parseInt(key));
+		//person.setId(Integer.parseInt(key));
+		//person.setSpecialKey(Integer.parseInt(key));
+		person.setSpecialKey(key);
 		person.setName(name);
 		person.setDateOfBirth(dob);
 		person.setMothersKey(m);
