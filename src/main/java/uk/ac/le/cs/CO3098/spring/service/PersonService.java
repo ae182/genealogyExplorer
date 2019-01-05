@@ -15,6 +15,10 @@ public class PersonService {
 	@Autowired 
 	private PersonRepository personRepository;
 	
+	public Iterable<APerson> findAllPersons() {
+		return personRepository.findAll();
+	}
+	
 	public void savePerson(APerson p) {
 		personRepository.save(p);
 		
@@ -36,7 +40,8 @@ public class PersonService {
 	
 	public APerson getParentTwo(String specialKey) {
 		
-		APerson currentPerson = personRepository.find(Integer.parseInt(specialKey));		
+		APerson currentPerson = new APerson();
+		//APerson currentPerson = personRepository.find(Integer.parseInt(specialKey));		
 		
 		System.out.println(currentPerson);
 		
