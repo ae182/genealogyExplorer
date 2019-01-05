@@ -34,6 +34,25 @@ public class PersonService {
 		
 	}
 	
+	public APerson getParentTwo(String specialKey) {
+		
+		APerson currentPerson = personRepository.find(Integer.parseInt(specialKey));		
+		
+		System.out.println(currentPerson);
+		
+		if (currentPerson.getMothersKey() != null || currentPerson.getFathersKey() != null) {
+			
+			getParentTwo(currentPerson.getMothersKey());
+			
+			getParentTwo(currentPerson.getFathersKey());
+			
+		} 
+		
+		return currentPerson; 
+		
+	}
+	
+	
 	public APerson getPerson(String specialKey) {
 		return personRepository.findAPersonBySpecialKey(specialKey);
 	}
