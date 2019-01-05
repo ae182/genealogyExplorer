@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import uk.ac.le.cs.CO3098.spring.domain.APerson;
 import uk.ac.le.cs.CO3098.spring.domain.Person;
@@ -20,6 +21,12 @@ public class geController {
 	
 	@Autowired
 	public PersonService personService; 
+	
+	// GET /listAll
+	@RequestMapping( value = {"/listAll" })
+	public ModelAndView listAll() {
+		return new ModelAndView("Person/listAll", "persons", personService.findAllPersons());
+	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public @ResponseBody String delete(@PathVariable String id) {
