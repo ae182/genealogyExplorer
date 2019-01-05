@@ -58,18 +58,18 @@ public class geController {
 		
 		System.out.println("It's working");
 		
-		// person 7
+		// return that person object 
 		APerson person = personService.getPerson(id);
-		
-		person.setAncestors(personService.getParent(id));
+				
+		person.setAncestors(personService.getParentTwo(id));
 		
 		System.out.println("It's working");
 		
 		//String [] mfids = personService.getParent(id);
 		
-		
-				
-		return "Worked ";
+			
+		return "something";
+		//return "Worked ";
 	}
 	
 	//////
