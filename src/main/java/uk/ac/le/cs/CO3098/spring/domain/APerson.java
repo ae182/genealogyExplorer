@@ -1,5 +1,8 @@
 package uk.ac.le.cs.CO3098.spring.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -27,6 +30,33 @@ public class APerson {
 	
 	@Column(name = "gender")
 	private String gender;
+	
+	@Transient
+	private List<APerson> Ancestors;
+	
+	public APerson(String specialKey, String name, String dateOfBirth, String mothersKey, String fathersKey, String gender) {
+		this.specialKey = specialKey;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.mothersKey = mothersKey;
+		this.fathersKey = fathersKey;
+		this.gender = gender;
+		
+	}
+	
+	public APerson() {
+		Ancestors = new ArrayList<APerson>();
+	}
+	
+	public void setAncestors(APerson person) {
+		
+		Ancestors.add(person);
+	}
+	
+	public List<APerson> getAncestors() {
+		return Ancestors;
+	}
+	
 		
 	@Override
 	public String toString() {
