@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import uk.ac.le.cs.CO3098.spring.domain.APerson;
+import uk.ac.le.cs.CO3098.spring.domain.Account;
 import uk.ac.le.cs.CO3098.spring.domain.Person;
 import uk.ac.le.cs.CO3098.spring.service.PersonService;
 
+
+// /GE/person
 @Controller
 @RequestMapping("/GE/person")
 public class geController {
@@ -22,6 +25,38 @@ public class geController {
 	@Autowired
 	public PersonService personService; 
 	
+	// GET /create
+	// File located underneath views folder
+	@RequestMapping(value = "/create")
+    public ModelAndView create(){	
+    	  return new ModelAndView("create");  
+    } 
+	
+	// POST /save
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ModelAndView save(APerson person){
+		
+		System.out.println("Hit the controller");
+        personService.savePerson(person); 
+        return new ModelAndView("redirect:/GE/person/listAll");
+
+    }
+	
+	// POST /savePerson 
+	@RequestMapping(value = "/submit", method = RequestMethod.POST)
+	public String savePerson(
+			@RequestParam(value="name") String name,
+			@RequestParam(value="dob") String dob,
+			@RequestParam(value="gender") String gender
+			) {
+		
+		System.out.println("Inside the submit method ");
+		//personService.savePerson(); 
+        //return new ModelAndView("redirect:/GE/person/listAll");
+		return "New Save controller method";
+	}
+	
+		
 	// GET /listAll
 	@RequestMapping( value = {"/listAll" })
 	public ModelAndView listAll() {

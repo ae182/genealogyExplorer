@@ -14,10 +14,11 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
 </script>
     <title>Edit account</title>
     <link type="text/css" href="/css/bootstrap.css" rel="stylesheet" />
+    <link type="text/css" href="/resources/css/styles.css" rel="stylesheet" /> 
 </head>
 <body>
 <h2>Create new Person</h2>
-<form action="/person/save" method="post">
+<form> <!--action="/person/save" method="post" -->
     <table class="table table-bordered">
         <tbody>
             <!--  <tr><th>id</th><td><input type="text" name="id" required="required"></td></tr> -->
@@ -26,7 +27,9 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
             <tr><th>gender</th><td><input placeholder="type male or female" type="text" name="gender" required="required" id="gender"></td></tr>
             <tr><td colspan="2"><a href="./Person/listAll" class="btn btn-primary">Back</a> 
             <input type="submit" value="Add" id="submitButton" class="btn btn-success"></tr>
-            <p id="error">Error not valid</p>
+            <p id="nameError">Name not valid</p>
+            <p id="nameError">Date of Birth not valid</p>
+            <p id="nameError">gender not valid</p>
                         
         </tbody>
     </table>
@@ -34,6 +37,106 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+	$(document).ready(function() {
+		
+		
+		$("#submitButton").on("click",function(e) {
+			
+			e.preventDefault();
+			
+			console.log("inside submit function");
+			
+			isValid = false;
+			
+			// Get the values from the form
+			var nameValue = $("#name").val();
+			
+			var dobValue = $("#dob").val();
+				
+			var genderValue = $("#gender").val();
+						
+			if (nameValue == "" || dobValue == "" || genderValue == "") {
+				
+				if (nameValue == "") {
+					isValid = false;
+				} else {
+					isValid = true;
+				}
+				
+				if (dobValue == "") {
+					isValid = false;	
+				} else {
+					isValid = true;
+				}
+				
+				if (genderValue == "") {
+					
+					isValid = false;
+				} else {
+					
+					isValid = true;
+				}
+				
+			}
+			
+			var saveUrl = window.origin + "/GE/person/submit";
+			
+			console.log(saveUrl);
+			
+			alert(saveUrl);
+			
+			// If form is value then Ajax
+			if (isValid == true) {
+			
+				alert("form is valid");
+				
+				$("p").css({"background-color": "yellow", "font-size": "200%"});
+				$("#error").css({"visibility": "visible"})
+				
+							
+				$.ajax({
+					type: POST,
+					url: saveUrl,
+					data: { name: nameValue, 
+						    dob : dobValue, 
+						    gender: genderValue },
+					
+				})
+			
+			}
+						
+			alert("ready");
+			
+		});
+		
+	});
+		
+	
+	function checkErrors() {
+		
+		var nameValue = $("#name").val();
+		console.log(nameValue);
+		
+		var dobValue = $("#dob").val();
+		console.log(dobValue);
+		
+		var genderValue = $("#gender").val();
+		console.log(genderValue);
+		
+		if ( (nameValue == "" || nameValue == null) || 
+	       (dobValue == ""  || dobValue == null) ||
+	       (genderValue == "" || genderValue == null) ) {
+			
+			return false
+			
+		}
+		
+		return true;
+	}		
+
+</script>
 
 </body>
 </html>
