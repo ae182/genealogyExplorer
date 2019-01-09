@@ -124,21 +124,31 @@ public class geController {
 	public @ResponseBody String add(
 			@RequestParam(value="key") String key,
 			@RequestParam(value="name") String name,
-			@RequestParam(value="dob") String dob,
-			@RequestParam(value="m") String m,
-			@RequestParam(value="f") String f,
-			@RequestParam(value="g") String g
+			//@RequestParam(value="dob") String dob,
+			@RequestParam(value="m", required = false) String m,
+			@RequestParam(value="f", required = false) String f
+			//@RequestParam(value="g") String g
 			)
 	 {
 		
+		APerson person = personService.getPerson(key);
+		
+		personService.setPersonsMotherAndFather(f, m,person.getSpecialKey());
+		
+		System.out.println( person.getName() );
+		
+		return person.getName();
+		
+		//return "inside method";
+		/*
 		// Exception checking to make properties are not empty
 		if (
 			key.isEmpty() || key == null || 
 			name.isEmpty() || name == null ||
-			dob.isEmpty() || dob == null ||
+			//dob.isEmpty() || dob == null ||
 			m.isEmpty() || m == null ||
-			f.isEmpty() || m == null ||
-			g.isEmpty() || g == null
+			f.isEmpty() || m == null
+			//g.isEmpty() || g == null
 			) {
 			
 
@@ -149,10 +159,10 @@ public class geController {
 	
 		person.setSpecialKey(key);
 		person.setName(name);
-		person.setDateOfBirth(dob);
+		//person.setDateOfBirth(dob);
 		person.setMothersKey(m);
 		person.setFathersKey(f);
-		person.setGender(g);
+		//person.setGender(g);
 		
 		// Check whether the mother and father property has been set otherwise insert into database
 		if (person.getMothersKey() == "" && person.getFathersKey() == "" ) {
@@ -190,9 +200,12 @@ public class geController {
 			}
 						
 			
-		}
+		}*/
 				
 	} // End method
+	
+	
+	// GET /GE/person/add?key=1&name=King%20George%20VI
 	
 	
 
