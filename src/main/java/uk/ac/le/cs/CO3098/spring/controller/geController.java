@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import uk.ac.le.cs.CO3098.spring.domain.APerson;
-import uk.ac.le.cs.CO3098.spring.domain.Person;
 import uk.ac.le.cs.CO3098.spring.service.PersonService;
 
 @Controller
@@ -21,6 +20,12 @@ public class geController {
 	
 	@Autowired
 	public PersonService personService; 
+	
+	// This return the create person view 
+	 @RequestMapping(value = "/create")
+    public ModelAndView create(){	
+    	  return new ModelAndView("create");    
+    } 
 	
 	// GET /listAll
 	@RequestMapping( value = {"/listAll" })
