@@ -17,7 +17,7 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     <link type="text/css" href="/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <h2>List of Accounts</h2>
+    <h2>List of Users</h2>
     <table class="table table-bordered">
         <tr>
             <th>id</th>
@@ -35,7 +35,7 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
         </tbody>
 
     </table>
-    <a href="/person/create" class="btn btn-primary">Add new account</a>
+    <a href="/GE/person/create" class="btn btn-primary">Add new account</a>
 
 </body>
 </html>
