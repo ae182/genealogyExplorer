@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import uk.ac.le.cs.CO3098.spring.domain.APerson;
-import uk.ac.le.cs.CO3098.spring.domain.Person;
+
 
 @Repository
 public interface PersonRepository extends CrudRepository<APerson,Integer> {

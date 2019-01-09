@@ -17,13 +17,19 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     <link type="text/css" href="/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-<h2>Create new Account</h2>
+<h2>Create new Person</h2>
 <form action="/account/save" method="post">
     <table class="table table-bordered">
         <tbody>
             <!--  <tr><th>id</th><td><input type="text" name="id" required="required"></td></tr>-->
+            <tr><th>dateOfBirth</th><td><input type="text" name="dateOfBirth" required="required"></td></tr>
+            <tr><th>fathersKey</th><td><input type="text" name="fathersKey" required="required"></td></tr>
+            <tr><th>gender</th><td><input type="text" name="gender" required="required"></td></tr>
+            <tr><th>mothersKey</th><td><input type="text" name="mothersKey" required="required"></td></tr>
             <tr><th>name</th><td><input type="text" name="name" required="required"></td></tr>
-            <tr><th>name</th><td><input type="text" name="name" required="required"></td></tr>
+            <tr><th>key</th><td><input type="text" name="specialKey" required="required"></td></tr>
+            
+            
            <tr><td colspan="2"><a href="./listAll" class="btn btn-primary">Back</a> <input type="submit" value="Add" class="btn btn-success"></tr>
         </tbody>
     </table>
