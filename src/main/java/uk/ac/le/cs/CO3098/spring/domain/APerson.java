@@ -34,6 +34,19 @@ public class APerson {
 	@Transient
 	private List<APerson> Ancestors;
 	
+	@Transient
+	private int m,f; 
+	
+//	public APerson(String specialKey, String name, String dateOfBirth, String mothersKey, String fathersKey, String gender) {
+//		this.specialKey = specialKey;
+//		this.name = name;
+//		this.dateOfBirth = dateOfBirth;
+//		this.mothersKey = mothersKey;
+//		this.fathersKey = fathersKey;
+//		this.gender = gender;
+//		
+//	}
+	
 	public APerson(String specialKey, String name, String dateOfBirth, String mothersKey, String fathersKey, String gender) {
 		this.specialKey = specialKey;
 		this.name = name;
@@ -93,6 +106,9 @@ public class APerson {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	
 
 	public String getMothersKey() {
 		return mothersKey;
@@ -108,6 +124,22 @@ public class APerson {
 
 	public void setFathersKey(String fathersKey) {
 		this.fathersKey = fathersKey;
+	}
+	
+	public int getM() {
+		return m;
+	}
+
+	public void setM(int m) {
+		this.m = m;
+	}
+
+	public int getF() {
+		return f;
+	}
+
+	public void setF(int f) {
+		this.f = f;
 	}
 
 	public String getDateOfBirth() {
