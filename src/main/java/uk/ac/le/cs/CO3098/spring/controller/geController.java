@@ -33,8 +33,8 @@ public class geController {
     public ModelAndView create(){	
     	  return new ModelAndView("create");    
     } 
-	
 	// API calls below here 
+
 
 	 @RequestMapping(value = "/landin")
 	    public ModelAndView landin(){	
@@ -80,8 +80,10 @@ public class geController {
 		return o;
 				
 	}
+
 		
 	//@RequestMapping(value = {"/ancestors/{id}"})
+
 	
 	// POST /GE/person/savePerson 
 //	@RequestMapping(value = "/savePerson", method = RequestMethod.POST)
@@ -165,6 +167,7 @@ public class geController {
          return asasa;
     }
 
+
 	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
 	public @ResponseBody String ancestorsTwo(@PathVariable String id) {
 		
@@ -178,7 +181,7 @@ public class geController {
 		System.out.println("It's working");
 				
 		return "something";
-	
+
 	}
 	
 	// GET /GE/person/add?key=11&name=Prince%20George&m=10&f=8
@@ -232,9 +235,10 @@ public class geController {
 				personService.savePerson(person);
 				return  "person saved";
 			}
-					
+
 		}
 				
 	} // End method	
 	
+
 }
