@@ -63,8 +63,6 @@ public class geController {
 		}
 				
 	}
-	//////
-	
 	
 	// GET /GE/person/ancestors/6
 	//	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
@@ -152,76 +150,9 @@ public class geController {
 		
 		System.out.println( person.getName() );
 		
-		return person.getName();
-		
-		//return "inside method";
-		/*
-		// Exception checking to make properties are not empty
-		if (
-			key.isEmpty() || key == null || 
-			name.isEmpty() || name == null ||
-			//dob.isEmpty() || dob == null ||
-			m.isEmpty() || m == null ||
-			f.isEmpty() || m == null
-			//g.isEmpty() || g == null
-			) {
-			
-
-			return " GeneralException: Cannot create a Person since some of the fields are empty ";
-		}
-		
-		APerson person = new APerson();
-	
-		person.setSpecialKey(key);
-		person.setName(name);
-		//person.setDateOfBirth(dob);
-		person.setMothersKey(m);
-		person.setFathersKey(f);
-		//person.setGender(g);
-		
-		// Check whether the mother and father property has been set otherwise insert into database
-		if (person.getMothersKey() == "" && person.getFathersKey() == "" ) {
-			
-			personService.savePerson(person);
-		}
-			
-		// Check that the person already exists
-		APerson isPersonExist = personService.getPerson(person.getSpecialKey());
+		return "Updating tree for " + person.getName();
 				
-		if (isPersonExist == null) {
-			
-			// The database is completely empty, create person
-			personService.savePerson(person);
-			return "Database was empty we are going to create a person";
-					
-		} else {
-			
-			APerson mother = personService.getPerson(isPersonExist.getMothersKey());
-			APerson father = personService.getPerson(isPersonExist.getFathersKey());
-			
-			if (mother != null && father != null ) {
-				
-				personService.savePerson(person);
-				return "person save into database";
-				
-			} else {
-				// no parents don't create person 
-				
-				//System.out.println("No parents don't create person");
-				//return "No parents don't create person";
-				
-				personService.savePerson(person);
-				return  "person saved";
-			}
-						
-			
-		}*/
-				
-	} // End method
-	
-	
-	// GET /GE/person/add?key=1&name=King%20George%20VI
-	
+	} // End method	
 	
 
 }
