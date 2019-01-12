@@ -23,12 +23,16 @@ public class geController {
 	@Autowired
 	public PersonService personService; 
 	
+	// Returns view below here 
+	
 	// This return the create person view 
 	 @RequestMapping(value = "/create")
     public ModelAndView create(){	
     	  return new ModelAndView("create");    
     } 
 	
+	// API calls below here 
+	 
 	// GET /listAll
 	@RequestMapping( value = {"/listAll" })
 	public ModelAndView listAll() {
@@ -63,29 +67,7 @@ public class geController {
 		}
 				
 	}
-	//////
-	
-	
-	// GET /GE/person/ancestors/6
-//	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
-//	public @ResponseBody String ancestors(@PathVariable String id) {
-//		
-//		System.out.println("It's working");
-//		
-//		// return that person object 
-//		APerson person = personService.getPerson(id);
-//				
-//		person.setAncestors(personService.getParentTwo(id));
-//		
-//		System.out.println("It's working");
-//		
-//		//String [] mfids = personService.getParent(id);
-//		
-//			
-//		return "something";
-//		//return "Worked ";
-//	}
-	
+		
 	@RequestMapping(value = {"/ancestors/{id}"})
     public @ResponseBody Object ancestrors(@PathVariable Integer id){
 	  List <Parents2> acc = new ArrayList<>();
@@ -116,84 +98,42 @@ public class geController {
 	  Object asasa= acc.toString();
          return asasa;
     }
+
+	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
+	public @ResponseBody String ancestorsTwo(@PathVariable String id) {
+		
+		System.out.println("It's working");
+		
+		// return that person object 
+		APerson person = personService.getPerson(id);
+				
+		person.setAncestors(personService.getParentTwo(id));
+		
+		System.out.println("It's working");
+				
+		return "something";
 	
-	//////
+	}
 	
-	
+	// GET /GE/person/add?key=11&name=Prince%20George&m=10&f=8
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public @ResponseBody String add(
 			@RequestParam(value="key") String key,
 			@RequestParam(value="name") String name,
-			@RequestParam(value="dob") String dob,
-			@RequestParam(value="m") String m,
-			@RequestParam(value="f") String f,
-			@RequestParam(value="g") String g
+			@RequestParam(value="m", required = false) String m,
+			@RequestParam(value="f", required = false) String f
 			)
 	 {
 		
-		// Exception checking to make properties are not empty
-		if (
-			key.isEmpty() || key == null || 
-			name.isEmpty() || name == null ||
-			dob.isEmpty() || dob == null ||
-			m.isEmpty() || m == null ||
-			f.isEmpty() || m == null ||
-			g.isEmpty() || g == null
-			) {
-			
-
-			return " GeneralException: Cannot create a Person since some of the fields are empty ";
-		}
+		APerson person = personService.getPerson(key);
 		
-		APerson person = new APerson();
-	
-		person.setSpecialKey(key);
-		person.setName(name);
-		person.setDateOfBirth(dob);
-		person.setMothersKey(m);
-		person.setFathersKey(f);
-		person.setGender(g);
+		personService.setPersonsMotherAndFather(f, m,person.getSpecialKey());
 		
-		// Check whether the mother and father property has been set otherwise insert into database
-		if (person.getMothersKey() == "" && person.getFathersKey() == "" ) {
-			
-			personService.savePerson(person);
-		}
-			
-		// Check that the person already exists
-		APerson isPersonExist = personService.getPerson(person.getSpecialKey());
+		System.out.println( person.getName() );
+		
+		return "Updating tree for " + person.getName();
 				
-		if (isPersonExist == null) {
-			
-			// The database is completely empty, create person
-			personService.savePerson(person);
-			return "Database was empty we are going to create a person";
-					
-		} else {
-			
-			APerson mother = personService.getPerson(isPersonExist.getMothersKey());
-			APerson father = personService.getPerson(isPersonExist.getFathersKey());
-			
-			if (mother != null && father != null ) {
-				
-				personService.savePerson(person);
-				return "person save into database";
-				
-			} else {
-				// no parents don't create person 
-				
-				//System.out.println("No parents don't create person");
-				//return "No parents don't create person";
-				
-				personService.savePerson(person);
-				return  "person saved";
-			}
-						
-			
-		}
-				
-	} // End method
-	
+	} // End method	
 	
 
 }

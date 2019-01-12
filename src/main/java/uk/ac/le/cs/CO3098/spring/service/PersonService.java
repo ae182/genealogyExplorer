@@ -65,6 +65,14 @@ public class PersonService {
 		return personRepository.findAPersonBySpecialKey(specialKey);
 	}
 	
+	public void setPersonsMotherAndFather(String fatherKey, String motherKey,String specialKey) {
+		personRepository.setFatherAndMother(fatherKey, motherKey, specialKey);
+	}
+	
+	public void setPersonsFather(String specialKey) {
+		
+	}
+	
 	public void deleteAPerson(Integer id) {
 			
 		personRepository.delete(id);
