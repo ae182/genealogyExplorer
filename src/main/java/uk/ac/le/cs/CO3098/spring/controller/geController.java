@@ -106,12 +106,9 @@ public class geController {
 		person.setAncestors(personService.getParentTwo(id));
 		
 		System.out.println("It's working");
-		
-		// String [] mfids = personService.getParent(id);
-		
-			
+				
 		return "something";
-		//return "Worked ";
+	
 	}
 	
 	// GET /GE/person/add?key=11&name=Prince%20George&m=10&f=8
