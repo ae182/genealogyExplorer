@@ -23,12 +23,16 @@ public class geController {
 	@Autowired
 	public PersonService personService; 
 	
+	// Returns view below here 
+	
 	// This return the create person view 
 	 @RequestMapping(value = "/create")
     public ModelAndView create(){	
     	  return new ModelAndView("create");    
     } 
 	
+	// API calls below here 
+	 
 	// GET /listAll
 	@RequestMapping( value = {"/listAll" })
 	public ModelAndView listAll() {
