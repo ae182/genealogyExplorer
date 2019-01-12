@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import uk.ac.le.cs.CO3098.spring.domain.APerson;
+import uk.ac.le.cs.CO3098.spring.domain.JsonR;
 import uk.ac.le.cs.CO3098.spring.domain.Parents2;
 import uk.ac.le.cs.CO3098.spring.service.PersonService;
 
@@ -29,6 +32,12 @@ public class geController {
     	  return new ModelAndView("create");    
     } 
 	
+	 @RequestMapping(value = "/landin")
+	    public ModelAndView landin(){	
+	    	  return new ModelAndView("landin");    
+	    } 
+	 
+	 
 	// GET /listAll
 	@RequestMapping( value = {"/listAll" })
 	public ModelAndView listAll() {
@@ -48,21 +57,54 @@ public class geController {
 	}
 	
 	// GET /GE/person/get/12
-	@RequestMapping(value="/get/{id}", method=RequestMethod.GET)
-	public @ResponseBody String get(@PathVariable String id) {
-				
+	@RequestMapping(value="/get/{id}", method=RequestMethod.GET, produces="application/json")
+	public @ResponseBody Object get(@PathVariable String id) {
+		Object o;
+		Gson gson= new Gson();		
 		APerson personInfo = personService.getPerson(id);
 		
 		if (personInfo == null ) {
 			
-			return "Person does not exist";
+			JsonR jmess = new JsonR("Person does not exist");
+			
+			o=jmess;
 			
 		} else {
 			
-			return personInfo.toString();
+			o= gson.toJson(personInfo);
 		}
+		return o;
 				
 	}
+	
+	// POST /GE/person/savePerson 
+//	@RequestMapping(value = "/savePerson", method = RequestMethod.POST)
+//	public @ResponseBody Object savePerson(@RequestBodyAPerson person) {
+//			
+//			/*
+//			@RequestParam(value="name") String name,
+//			@RequestParam(value="dob") String dob,
+//			@RequestParam(value="gender") String gender,
+//			@RequestParam(value="mothersKey") String mothersKey,
+//			@RequestParam(value="fathersKey") String fathersKey,
+//			@RequestParam(value="specialKey") String specialKey
+//			) {*/
+//			
+//		System.out.println("Inside the submit method ");
+//				
+//		personService.savePerson(new APerson(specialKey, name, dob, mothersKey, fathersKey, gender)); 
+//		
+//        //return new ModelAndView("redirect:/GE/person/listAll");
+//		return "New Save controller method";
+//	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ModelAndView savePerson(APerson p){
+		personService.savePerson(p);
+        return new ModelAndView("redirect:listAll");
+        
+	}
+	
 	//////
 	
 	
@@ -86,7 +128,7 @@ public class geController {
 //		//return "Worked ";
 //	}
 	
-	@RequestMapping(value = {"/ancestors/{id}"})
+	@RequestMapping(value = "/ancestors/{id}")
     public @ResponseBody Object ancestrors(@PathVariable Integer id){
 	  List <Parents2> acc = new ArrayList<>();
 	  int nid=id;
@@ -116,6 +158,7 @@ public class geController {
 	  Object asasa= acc.toString();
          return asasa;
     }
+
 	
 	//////
 	
@@ -188,11 +231,13 @@ public class geController {
 				personService.savePerson(person);
 				return  "person saved";
 			}
-						
+				
+			
 			
 		}
 				
 	} // End method
+	
 	
 	
 
