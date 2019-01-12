@@ -28,8 +28,9 @@ public interface PersonRepository extends CrudRepository<APerson,Integer> {
 	public List<String> getParent(String specialKey);
 	
 	
-	@Modifying(clearAutomatically = true)
+	@Modifying
 	@Query(value = SET_MOTHER_FATHER, nativeQuery = true)
+	@Transactional
 	public void setFatherAndMother(@Param("fathersKey")String fathersKey, @Param("mothersKey")String mothersKey, @Param("specialKey")String specialKey);
 	
 	
