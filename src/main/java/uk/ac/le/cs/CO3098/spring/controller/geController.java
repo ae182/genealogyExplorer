@@ -67,24 +67,24 @@ public class geController {
 	
 	
 	// GET /GE/person/ancestors/6
-//	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
-//	public @ResponseBody String ancestors(@PathVariable String id) {
-//		
-//		System.out.println("It's working");
-//		
-//		// return that person object 
-//		APerson person = personService.getPerson(id);
-//				
-//		person.setAncestors(personService.getParentTwo(id));
-//		
-//		System.out.println("It's working");
-//		
-//		//String [] mfids = personService.getParent(id);
-//		
-//			
-//		return "something";
-//		//return "Worked ";
-//	}
+	//	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
+	//	public @ResponseBody String ancestors(@PathVariable String id) {
+	//		
+	//		System.out.println("It's working");
+	//		
+	//		// return that person object 
+	//		APerson person = personService.getPerson(id);
+	//				
+	//		person.setAncestors(personService.getParentTwo(id));
+	//		
+	//		System.out.println("It's working");
+	//		
+	//		//String [] mfids = personService.getParent(id);
+	//		
+	//			
+	//		return "something";
+	//		//return "Worked ";
+	//	}
 	
 	@RequestMapping(value = {"/ancestors/{id}"})
     public @ResponseBody Object ancestrors(@PathVariable Integer id){
@@ -116,18 +116,33 @@ public class geController {
 	  Object asasa= acc.toString();
          return asasa;
     }
+
+	@RequestMapping(value="/ancestors/{id}", method=RequestMethod.GET)
+	public @ResponseBody String ancestorsTwo(@PathVariable String id) {
+		
+		System.out.println("It's working");
+		
+		// return that person object 
+		APerson person = personService.getPerson(id);
+				
+		person.setAncestors(personService.getParentTwo(id));
+		
+		System.out.println("It's working");
+		
+		// String [] mfids = personService.getParent(id);
+		
+			
+		return "something";
+		//return "Worked ";
+	}
 	
-	//////
-	
-	
+	// GET /GE/person/add?key=11&name=Prince%20George&m=10&f=8
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public @ResponseBody String add(
 			@RequestParam(value="key") String key,
 			@RequestParam(value="name") String name,
-			//@RequestParam(value="dob") String dob,
 			@RequestParam(value="m", required = false) String m,
 			@RequestParam(value="f", required = false) String f
-			//@RequestParam(value="g") String g
 			)
 	 {
 		
